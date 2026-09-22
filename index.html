@@ -38,7 +38,7 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
     </div>
     <div class="toolbar"><h2>Holdings</h2><div id="mainStatus" class="status">CoinGecko live feed</div></div>
     <div class="table"><table><thead><tr><th>Asset</th><th>Qty</th><th>Entry</th><th>Live</th><th>Value</th><th>P/L</th><th>Alloc.</th></tr></thead><tbody id="holdingsBody"></tbody></table></div>
-    <div class="note">Entry prices are taken from your 22 Sep 2026 reference table. GRAM is mapped to The Open Network (TON). AIN stays pinned at $0.02098 until a verified live market mapping is available.</div>
+    <div class="note">Holdings updated from your latest 22 Sep 2026 KuCoin snapshot. Entry prices retain the existing reference baseline where available. NEAR uses $4.4127 as its new-position reference. AIN uses the latest KuCoin snapshot price ($0.02317) until a verified live market mapping is available.</div>
   </section>
 
   <section id="meme" class="panel">
@@ -57,21 +57,21 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
 <script>
 const INITIAL=2885.08;
 const holdings=[
-{s:'SOL',n:'Solana',q:4,entry:118.77,initial:475.03,id:'solana'},
-{s:'DOT',n:'Polkadot',q:327.44319236,entry:1.1877,initial:388.86,id:'polkadot'},
-{s:'GRAM',n:'Telegram / TON',q:219.96220392,entry:1.4530,initial:319.79,id:'the-open-network'},
-{s:'ARB',n:'Arbitrum',q:1356.4934,entry:.2236,initial:303.28,id:'arbitrum'},
-{s:'UNI',n:'Uniswap',q:29.3016,entry:8.8609,initial:259.73,id:'uniswap'},
-{s:'MON',n:'Monad',q:8419.90,entry:.02588,initial:217.88,id:'monad'},
-{s:'USDT',n:'Tether',q:183.73,entry:1,initial:183.71,id:'tether'},
-{s:'OP',n:'Optimism',q:1367.321,entry:.1253,initial:171.30,id:'optimism'},
-{s:'ONDO',n:'Ondo',q:334.5913,entry:.45242,initial:151.10,id:'ondo-finance'},
-{s:'JTO',n:'Jito',q:291.82,entry:.516,initial:150.54,id:'jito-governance-token'},
-{s:'APT',n:'Aptos',q:184.6256269,entry:.774,initial:142.39,id:'aptos'},
-{s:'AIN',n:'AI Network',q:5193.40,entry:.02098,initial:109.29,id:'ai-network',pinned:true},
-{s:'KCS',n:'KuCoin Token',q:1.665,entry:12.18/1.665,initial:12.18,id:'kucoin-shares'}
+{s:'SOL',n:'Solana',q:3.00000464,entry:118.77,initial:356.31,id:'solana',price:117.14},
+{s:'DOT',n:'Polkadot',q:327.4496093,entry:1.1877,initial:388.87,id:'polkadot',price:1.1644},
+{s:'GRAM',n:'Telegram / TON',q:219.96424024,entry:1.4530,initial:319.61,id:'the-open-network',price:1.436},
+{s:'ARB',n:'Arbitrum',q:1356.4934,entry:.2236,initial:303.28,id:'arbitrum',price:.2142},
+{s:'UNI',n:'Uniswap',q:29.3016,entry:8.8609,initial:259.73,id:'uniswap',price:9.1048},
+{s:'MON',n:'Monad',q:8419.90,entry:.02588,initial:217.88,id:'monad',price:.0263},
+{s:'USDT',n:'Tether',q:430.60,entry:1,initial:430.60,id:'tether',price:.99988},
+{s:'OP',n:'Optimism',q:1367.321,entry:.1253,initial:171.30,id:'optimism',price:.1265},
+{s:'NEAR',n:'NEAR Protocol',q:35.7488,entry:4.4127,initial:157.82,id:'near',price:4.4127},
+{s:'ONDO',n:'Ondo',q:334.5913,entry:.45242,initial:151.39,id:'ondo-finance',price:.42984},
+{s:'APT',n:'Aptos',q:184.6256269,entry:.774,initial:142.89,id:'aptos',price:.7679},
+{s:'AIN',n:'AI Network',q:5193.40,entry:.02098,initial:108.96,id:'ai-network',price:.02317,pinned:true},
+{s:'KCS',n:'KuCoin Token',q:1.678,entry:12.18/1.665,initial:12.27,id:'kucoin-shares',price:7.37}
 ];
-holdings.forEach(h=>h.price=h.entry);
+holdings.forEach(h=>{if(h.price==null)h.price=h.entry});
 
 const memes=[
 {s:'NEAR',n:'NEAR',q:29.71481,price:4.35,value:129.20,initial:129.20,ch:4.90},
@@ -118,7 +118,7 @@ async function refreshMain(){
   const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+encodeURIComponent(ids)+'&vs_currencies=usd&include_24hr_change=true');
   if(!r.ok) throw Error();
   const d=await r.json();let live=0,fb=0;
-  holdings.forEach(h=>{if(h.pinned){h.price=h.entry;h.live=false;fb++;}else if(d[h.id]?.usd){h.price=d[h.id].usd;h.live=true;live++;}else{h.price=h.entry;h.live=false;fb++;}});
+  holdings.forEach(h=>{if(h.pinned){h.live=false;fb++;}else if(d[h.id]?.usd){h.price=d[h.id].usd;h.live=true;live++;}else{h.price=h.entry;h.live=false;fb++;}});
   renderMain();$('#mainUpdated').textContent=stamp();$('#mainLive').textContent=live+' live • '+fb+' reference';$('#mainStatus').textContent='Updated successfully';
  }catch(e){$('#mainStatus').textContent='Main price refresh failed';}
 }
