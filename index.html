@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Crypto Investment Dashboard</title>
 <style>
-:root{--bg:#090b0e;--panel:#11151b;--panel2:#151a22;--text:#f7f8fa;--muted:#8e96a4;--line:#252c36;--green:#17c99a;--red:#ff5c70;--accent:#7867ff}
+:root{--bg:#090b0e;--panel:#11151b;--panel2:#151a22;--text:#f7f8fa;--muted:#8e96a4;--line:#252c36;--green:#17c99a;--red:#ff5c70;--accent:#7867ff;--live:#ffb020}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#080a0d,#0d1015);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 .wrap{max-width:1180px;margin:auto;padding:18px 12px 80px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px}
 h1{font-size:25px;margin:0}.muted,.sub{color:var(--muted)}.sub{font-size:12px;margin-top:5px}
@@ -13,7 +13,7 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
 .tabs{display:flex;gap:8px;position:sticky;top:0;z-index:5;padding:8px 0;background:#090b0ef2}.tab{border-radius:999px;color:var(--muted)}.tab.active{color:#fff}
 .panel{display:none}.panel.active{display:block}.chips{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 14px}.chip,.pill{border:1px solid var(--line);background:#11151b;color:var(--muted);border-radius:999px;padding:6px 9px;font-size:11px}.chip b{color:#fff}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}.label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.value{font-size:24px;font-weight:850;margin-top:6px}
-.positive{color:var(--green)!important}.negative{color:var(--red)!important}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0}.toolbar h2{font-size:18px;margin:0}.status{font-size:12px;color:var(--muted)}
+.livePrice{color:var(--live)!important;font-weight:850}.positive{color:var(--green)!important}.negative{color:var(--red)!important}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0}.toolbar h2{font-size:18px;margin:0}.status{font-size:12px;color:var(--muted)}
 .table{overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel)}table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:13px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}th{font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:.08em}
 .asset{display:flex;align-items:center;gap:10px}.logo{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#1d2430;font-weight:900}.name{font-weight:800}.coinSub{font-size:11px;color:var(--muted);margin-top:2px}.note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:10px}
 .memeList{border:1px solid var(--line);border-radius:16px;overflow:hidden}.memeRow{display:grid;grid-template-columns:1.4fr .7fr .7fr .7fr;gap:10px;align-items:center;padding:14px;border-bottom:1px solid var(--line)}.memeRow:last-child{border-bottom:0}.r{text-align:right}
