@@ -26,7 +26,7 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
     <div><h1>Investment Dashboard</h1><div class="sub">Live portfolio & memecoin tracker</div></div>
     <div class="actions"><button id="resetBtn">Entry prices</button><button id="refreshBtn" class="primary">↻ Refresh all</button></div>
   </div>
-  <div class="tabs"><button class="tab active" data-tab="portfolio">Portfolio</button><button class="tab" data-tab="meme">Memecoin</button></div>
+  <div class="tabs"><button class="tab active" data-tab="portfolio">Portfolio</button><button class="tab" data-tab="meme">Memecoin</button><button class="tab" data-tab="watchlist">Watch list</button></div>
 
   <section id="portfolio" class="panel active">
     <div class="chips"><span class="chip">Snapshot <b>23 Sep 2026</b></span><span class="chip">Initial <b>$3,308.01</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
@@ -53,6 +53,19 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
     <div id="memeList" class="memeList"></div>
     <div class="note">Entry prices and position baselines were reset from your latest 23 Sep 2026 screenshot. P/L starts at $0.00 from this reset point. Live prices are pulled from DEX markets; unmatched tokens retain the snapshot price and are marked snapshot fallback.</div>
   </section>
+
+  <section id="watchlist" class="panel">
+    <div class="chips"><span class="chip">Started <b>23 Sep 2026</b></span><span class="chip">Assumed per coin <b>$150</b></span><span class="chip">Total simulated <b>$1,500</b></span><span class="chip">Updated <b id="watchUpdated">not yet</b></span></div>
+    <div class="grid">
+      <div class="card"><div class="label">Simulated investment</div><div class="value">$1,500.00</div><div class="sub">10 coins × $150</div></div>
+      <div class="card"><div class="label">Current simulated value</div><div id="watchValue" class="value">$1,500.00</div><div class="sub">Based on live prices</div></div>
+      <div class="card"><div class="label">Overall move</div><div id="watchMove" class="value">0.00%</div><div class="sub">Since entry snapshot</div></div>
+      <div class="card"><div class="label">Best mover</div><div id="watchBest" class="value">—</div><div id="watchBestSub" class="sub">—</div></div>
+    </div>
+    <div class="toolbar"><h2>Watch list</h2><div><span id="watchStatus" class="status">CoinGecko live feed</span> <button id="watchRefreshBtn" class="primary">↻ Refresh</button></div></div>
+    <div class="table"><table><thead><tr><th>Asset</th><th>Entry</th><th>Live</th><th>Movement</th><th>Assumed $150 value</th></tr></thead><tbody id="watchBody"></tbody></table></div>
+    <div class="note">Entry prices are the 23 Sep 2026 starting snapshot. Each coin is modeled as a $150 position, so the quantity is fixed at $150 ÷ entry price. Movement is measured only from the entry price. Live refresh uses CoinGecko when available.</div>
+  </section>
 </div>
 <script>
 const INITIAL=3308.01;
@@ -72,6 +85,19 @@ const holdings=[
 {s:'KCS',n:'KuCoin Token',q:1.678,entry:7.465,initial:12.52,id:'kucoin-shares',price:7.465}
 ];
 holdings.forEach(h=>{if(h.price==null)h.price=h.entry});
+
+const watchlist=[
+{s:'AVAX',n:'Avalanche',id:'avalanche',entry:11.23,price:11.23},
+{s:'JTO',n:'Jito',id:'jito',entry:.5165,price:.5165},
+{s:'JUP',n:'Jupiter',id:'jupiter',entry:.3044,price:.3044},
+{s:'HYPE',n:'Hyperliquid',id:'hyperliquid',entry:96.93,price:96.93},
+{s:'BNB',n:'BNB',id:'bnb',entry:796.26,price:796.26},
+{s:'USELESS',n:'Useless Coin',id:'useless-3',entry:.34196,price:.34196},
+{s:'ALICE',n:'My Neighbor Alice',id:'my-neighbor-alice',entry:.1471,price:.1471},
+{s:'AGRS',n:'Agoras: Tau Net',id:'agoras-tau-net',entry:.1827,price:.1827},
+{s:'SUI',n:'Sui',id:'sui',entry:1.02,price:1.02},
+{s:'CFG',n:'Centrifuge',id:'centrifuge',entry:.1395,price:.1395}
+].map(h=>({...h,q:150/h.entry}));
 
 const memes=[
 {s:'HOOKR',n:'Hookr.fun',q:9399.75107,price:.0155,value:145.34,initial:145.34,ch:.50},
@@ -146,10 +172,28 @@ async function refreshMemes(){
  await Promise.all(memes.map(async h=>{try{const p=await liveMeme(h);if(p&&+p.priceUsd>0){h.price=+p.priceUsd;h.value=h.q*h.price;if(p.priceChange?.h24!=null)h.ch=+p.priceChange.h24;h.live=true;h.dex=p.dexId||'DEX';live++;}else{h.live=false;fail++;}}catch(e){h.live=false;fail++;}}));
  renderMemes();$('#memeUpdated').textContent=stamp();$('#memeStatus').textContent=live+' live • '+fail+' snapshot fallback';
 }
-async function refreshAll(){const b=$('#refreshBtn');b.disabled=true;b.textContent='Refreshing…';await Promise.all([refreshMain(),refreshMemes()]);b.disabled=false;b.textContent='↻ Refresh all';}
-$('.tabs').onclick=e=>{const b=e.target.closest('.tab');if(!b)return;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));$('#'+b.dataset.tab).classList.add('active');if(b.dataset.tab==='meme')refreshMemes();}
-$('#refreshBtn').onclick=refreshAll;$('#memeRefreshBtn').onclick=refreshMemes;$('#resetBtn').onclick=()=>{holdings.forEach(h=>{h.price=h.entry;h.live=undefined});renderMain();$('#mainStatus').textContent='Entry-price view';};
-renderMain();renderMemes();refreshAll();
+function renderWatchlist(){
+ const total=watchlist.reduce((a,h)=>a+h.q*h.price,0), move=(total/1500-1)*100;
+ $('#watchValue').textContent=money(total); $('#watchMove').textContent=pct(move); $('#watchMove').className='value '+(move>=0?'positive':'negative');
+ const sorted=[...watchlist].sort((a,b)=>((b.price/b.entry)-1)-((a.price/a.entry)-1)),best=sorted[0],bm=(best.price/best.entry-1)*100;
+ $('#watchBest').textContent=best.s; $('#watchBestSub').textContent=pct(bm)+' since entry';
+ $('#watchBody').innerHTML=watchlist.map(h=>{const m=(h.price/h.entry-1)*100,v=h.q*h.price;return '<tr><td><div class="asset"><div class="logo">'+h.s.slice(0,2)+'</div><div><div class="name">'+h.s+'</div><div class="coinSub">'+h.n+'</div></div></div></td><td>'+price(h.entry)+'</td><td>'+price(h.price)+'</td><td class="'+(m>=0?'positive':'negative')+'"><b>'+pct(m)+'</b></td><td><b>'+money(v)+'</b></td></tr>'}).join('');
+}
+async function refreshWatchlist(){
+ $('#watchStatus').textContent='Fetching live prices…';
+ try{
+  const ids=watchlist.map(h=>h.id).join(',');
+  const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+encodeURIComponent(ids)+'&vs_currencies=usd');
+  if(!r.ok) throw Error();
+  const d=await r.json(); let live=0;
+  watchlist.forEach(h=>{if(d[h.id]?.usd){h.price=d[h.id].usd;live++;}});
+  renderWatchlist(); $('#watchUpdated').textContent=stamp(); $('#watchStatus').textContent=live+' / '+watchlist.length+' live';
+ }catch(e){$('#watchStatus').textContent='Watch list refresh failed'; renderWatchlist();}
+}
+async function refreshAll(){const b=$('#refreshBtn');b.disabled=true;b.textContent='Refreshing…';await Promise.all([refreshMain(),refreshMemes(),refreshWatchlist()]);b.disabled=false;b.textContent='↻ Refresh all';}
+$('.tabs').onclick=e=>{const b=e.target.closest('.tab');if(!b)return;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));$('#'+b.dataset.tab).classList.add('active');if(b.dataset.tab==='meme')refreshMemes();if(b.dataset.tab==='watchlist')refreshWatchlist();}
+$('#refreshBtn').onclick=refreshAll;$('#memeRefreshBtn').onclick=refreshMemes;$('#watchRefreshBtn').onclick=refreshWatchlist;$('#resetBtn').onclick=()=>{holdings.forEach(h=>{h.price=h.entry;h.live=undefined});renderMain();$('#mainStatus').textContent='Entry-price view';};
+renderMain();renderMemes();renderWatchlist();refreshAll();
 </script>
 </body>
 </html>
