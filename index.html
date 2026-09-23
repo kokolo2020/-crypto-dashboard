@@ -29,16 +29,16 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   <div class="tabs"><button class="tab active" data-tab="portfolio">Portfolio</button><button class="tab" data-tab="meme">Memecoin</button></div>
 
   <section id="portfolio" class="panel active">
-    <div class="chips"><span class="chip">Snapshot <b>23 Sep 2026</b></span><span class="chip">Initial <b>$2,885.08</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
+    <div class="chips"><span class="chip">Snapshot <b>23 Sep 2026</b></span><span class="chip">Initial <b>$3,308.01</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
     <div class="grid">
-      <div class="card"><div class="label">Initial investment</div><div class="value">$2,885.08</div><div class="sub">Fixed baseline</div></div>
-      <div class="card"><div class="label">Current value</div><div id="mainValue" class="value">$2,885.08</div><div id="mainLive" class="sub">Waiting for refresh</div></div>
+      <div class="card"><div class="label">Initial investment</div><div class="value">$3,308.01</div><div class="sub">Fixed baseline</div></div>
+      <div class="card"><div class="label">Current value</div><div id="mainValue" class="value">$3,308.01</div><div id="mainLive" class="sub">Waiting for refresh</div></div>
       <div class="card"><div class="label">Total P/L</div><div id="mainPL" class="value">$0.00</div><div id="mainPct" class="sub">0.00%</div></div>
       <div class="card"><div class="label">Largest position</div><div id="largest" class="value">—</div><div id="largestSub" class="sub">—</div></div>
     </div>
     <div class="toolbar"><h2>Holdings</h2><div id="mainStatus" class="status">CoinGecko live feed</div></div>
     <div class="table"><table><thead><tr><th>Asset</th><th>Qty</th><th>Entry</th><th>Live</th><th>Value</th><th>P/L</th><th>Alloc.</th></tr></thead><tbody id="holdingsBody"></tbody></table></div>
-    <div class="note">Holdings updated from your latest 23 Sep 2026 KuCoin snapshot. Entry prices and the fixed $2,885.08 portfolio baseline are retained from the existing dashboard. AIN uses the latest KuCoin snapshot price ($0.02473) until a verified live market mapping is available.</div>
+    <div class="note">Holdings updated from your latest 23 Sep 2026 KuCoin snapshot. Entry prices and the fixed $3,308.01 portfolio baseline were reset from your 23 Sep 2026 KuCoin snapshot; P/L starts at $0.00 from this reset point. AIN uses the latest KuCoin snapshot price ($0.02473) until a verified live market mapping is available.</div>
   </section>
 
   <section id="meme" class="panel">
@@ -55,21 +55,21 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   </section>
 </div>
 <script>
-const INITIAL=2885.08;
+const INITIAL=3308.01;
 const holdings=[
-{s:'SOL',n:'Solana',q:4.00000000,entry:118.77,initial:356.31,id:'solana',price:119.54},
-{s:'NEAR',n:'NEAR Protocol',q:103.2468,entry:4.4127,initial:157.82,id:'near',price:4.3701},
-{s:'DOT',n:'Polkadot',q:327.4496093,entry:1.1877,initial:388.87,id:'polkadot',price:1.1991},
-{s:'ARB',n:'Arbitrum',q:1356.4934,entry:.2236,initial:303.28,id:'arbitrum',price:.2433},
-{s:'UNI',n:'Uniswap',q:29.3016,entry:8.8609,initial:259.73,id:'uniswap',price:10.457},
-{s:'ONDO',n:'Ondo',q:595.3264,entry:.45242,initial:151.39,id:'ondo-finance',price:.4426},
-{s:'APT',n:'Aptos',q:312.6435269,entry:.774,initial:142.89,id:'aptos',price:.8389},
-{s:'MON',n:'Monad',q:8419.90,entry:.02588,initial:217.88,id:'monad',price:.02704},
-{s:'OP',n:'Optimism',q:1367.321,entry:.1253,initial:171.30,id:'optimism',price:.136},
+{s:'SOL',n:'Solana',q:4.00000000,entry:119.54,initial:478.06,id:'solana',price:119.54},
+{s:'NEAR',n:'NEAR Protocol',q:103.2468,entry:4.3701,initial:451.20,id:'near',price:4.3701},
+{s:'DOT',n:'Polkadot',q:327.4496093,entry:1.1991,initial:392.66,id:'polkadot',price:1.1991},
+{s:'ARB',n:'Arbitrum',q:1356.4934,entry:.2433,initial:329.96,id:'arbitrum',price:.2433},
+{s:'UNI',n:'Uniswap',q:29.3016,entry:10.457,initial:306.48,id:'uniswap',price:10.457},
+{s:'ONDO',n:'Ondo',q:595.3264,entry:.4426,initial:263.43,id:'ondo-finance',price:.4426},
+{s:'APT',n:'Aptos',q:312.6435269,entry:.8389,initial:262.22,id:'aptos',price:.8389},
+{s:'MON',n:'Monad',q:8419.90,entry:.02704,initial:227.62,id:'monad',price:.02704},
+{s:'OP',n:'Optimism',q:1367.321,entry:.136,initial:185.91,id:'optimism',price:.136},
 {s:'DASH',n:'Dash',q:2.374,entry:63.01,initial:149.55,id:'dash',price:63.01},
-{s:'AIN',n:'AI Network',q:5193.40,entry:.02098,initial:108.96,id:'ai-network',price:.02473,pinned:true},
-{s:'USDT',n:'Tether',q:119.40,entry:1,initial:430.60,id:'tether',price:.99975},
-{s:'KCS',n:'KuCoin Token',q:1.678,entry:12.18/1.665,initial:12.27,id:'kucoin-shares',price:7.465}
+{s:'AIN',n:'AI Network',q:5193.40,entry:.02473,initial:129.03,id:'ai-network',price:.02473,pinned:true},
+{s:'USDT',n:'Tether',q:119.40,entry:.99975,initial:119.37,id:'tether',price:.99975},
+{s:'KCS',n:'KuCoin Token',q:1.678,entry:7.465,initial:12.52,id:'kucoin-shares',price:7.465}
 ];
 holdings.forEach(h=>{if(h.price==null)h.price=h.entry});
 
