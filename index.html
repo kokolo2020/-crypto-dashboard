@@ -44,14 +44,14 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   <section id="meme" class="panel">
     <div class="chips"><span class="chip">Snapshot <b>23 Sep 2026</b></span><span class="chip">Source <b>DEX Screener</b></span><span class="chip">Updated <b id="memeUpdated">not yet</b></span></div>
     <div class="grid">
-      <div class="card"><div class="label">Baseline investment</div><div class="value">$905.82</div><div class="sub">22 Sep 2026 snapshots</div></div>
-      <div class="card"><div class="label">Current value</div><div id="memeTotal" class="value">$696.48</div><div id="memeLive" class="sub">9 positions</div></div>
+      <div class="card"><div class="label">Baseline investment</div><div class="value">$781.62</div><div class="sub">23 Sep 2026 reset snapshot</div></div>
+      <div class="card"><div class="label">Current value</div><div id="memeTotal" class="value">$781.62</div><div id="memeLive" class="sub">13 positions</div></div>
       <div class="card"><div class="label">Total P/L</div><div id="memePL" class="value">$0.00</div><div id="memePct" class="sub">0.00%</div></div>
       <div class="card"><div class="label">Largest position</div><div id="memeLargest" class="value">NEAR</div><div id="memeLargestSub" class="sub">$129.20</div></div>
     </div>
     <div class="toolbar"><h2>Memecoin holdings</h2><div><span id="memeStatus" class="status">DEX Screener live feed</span> <button id="memeRefreshBtn" class="primary">↻ Refresh</button></div></div>
     <div id="memeList" class="memeList"></div>
-    <div class="note">Original position baselines are from your earlier 22 Sep 2026 screenshots; quantities and snapshot prices were updated from your latest screenshot. NEAR uses this latest screenshot value as its starting baseline; SOL and ETH are no longer in the latest holdings snapshot. P/L compares each live position value with its screenshot baseline. Live prices are pulled from DEX markets; unmatched tokens retain the snapshot price and are marked snapshot fallback.</div>
+    <div class="note">Entry prices and position baselines were reset from your latest 23 Sep 2026 screenshot. P/L starts at $0.00 from this reset point. Live prices are pulled from DEX markets; unmatched tokens retain the snapshot price and are marked snapshot fallback.</div>
   </section>
 </div>
 <script>
@@ -74,15 +74,19 @@ const holdings=[
 holdings.forEach(h=>{if(h.price==null)h.price=h.entry});
 
 const memes=[
-{s:'NEAR',n:'NEAR',q:29.71481,price:4.35,value:129.20,initial:129.20,ch:4.90},
-{s:'WALLET',n:'Robinhood Wallet',q:4754.2536,price:.0271,value:129.00,initial:155.03,ch:44.00},
-{s:'HOOKR',n:'Hookr.fun',q:9399.75107,price:.0136,value:127.86,initial:311.40,ch:18.71},
-{s:'CATE',n:'Cate',q:990.37527,price:.0949,value:94.00,initial:92.13,ch:-2.37},
-{s:'MEME',n:'A Meme Coin',q:2079.36933,price:.027,value:56.07,initial:53.75,ch:-8.88},
-{s:'PROLOGUE',n:'Prologue',q:5872.90958,price:.0095,value:56.05,initial:60.16,ch:-11.88},
-{s:'PONS',n:'Pons',q:79.18628,price:.6102,value:48.32,initial:46.37,ch:-3.92},
-{s:'AERO',n:'Aerodrome Finance',q:55.05463,price:.6864,value:37.79,initial:37.80,ch:-.62},
-{s:'INDEX',n:'The Index',q:500,price:.0364,value:18.19,initial:19.98,ch:10.60}
+{s:'HOOKR',n:'Hookr.fun',q:9399.75107,price:.0155,value:145.34,initial:145.34,ch:.50},
+{s:'NEAR',n:'NEAR',q:29.71481,price:4.55,value:135.17,initial:135.17,ch:4.74},
+{s:'WALLET',n:'Robinhood Wallet',q:4754.2536,price:.0236,value:112.37,initial:112.37,ch:4.31},
+{s:'CATE',n:'Cate',q:990.37527,price:.1051,value:104.12,initial:104.12,ch:6.19},
+{s:'MEME',n:'A Meme Coin',q:2079.36933,price:.0352,value:73.16,initial:73.16,ch:23.56},
+{s:'PROLOGUE',n:'Prologue',q:5872.90958,price:.0112,value:65.56,initial:65.56,ch:5.77},
+{s:'PONS',n:'Pons',q:79.18628,price:.6788,value:53.75,initial:53.75,ch:13.65},
+{s:'AERO',n:'Aerodrome Finance',q:55.05463,price:.7273,value:40.04,initial:40.04,ch:5.60},
+{s:'INDEX',n:'The Index',q:500,price:.0362,value:18.08,initial:18.08,ch:-8.46},
+{s:'ETH',n:'Ethereum',q:.00565,price:2754.37,value:15.58,initial:15.58,ch:.81},
+{s:'ETH',n:'Ethereum',q:.0029,price:2754.05,value:7.99,initial:7.99,ch:.82},
+{s:'BNB',n:'BNB',q:.00695,price:791.32,value:5.50,initial:5.50,ch:.55},
+{s:'SOL',n:'Solana',q:.04168,price:118.95,value:4.96,initial:4.96,ch:2.02}
 ];
 
 const dex={
