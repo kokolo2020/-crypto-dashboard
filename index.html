@@ -29,7 +29,7 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   <div class="tabs"><button class="tab active" data-tab="portfolio">Portfolio</button><button class="tab" data-tab="meme">Memecoin</button></div>
 
   <section id="portfolio" class="panel active">
-    <div class="chips"><span class="chip">Snapshot <b>22 Sep 2026</b></span><span class="chip">Initial <b>$2,885.08</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
+    <div class="chips"><span class="chip">Snapshot <b>23 Sep 2026</b></span><span class="chip">Initial <b>$2,885.08</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
     <div class="grid">
       <div class="card"><div class="label">Initial investment</div><div class="value">$2,885.08</div><div class="sub">Fixed baseline</div></div>
       <div class="card"><div class="label">Current value</div><div id="mainValue" class="value">$2,885.08</div><div id="mainLive" class="sub">Waiting for refresh</div></div>
@@ -38,11 +38,11 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
     </div>
     <div class="toolbar"><h2>Holdings</h2><div id="mainStatus" class="status">CoinGecko live feed</div></div>
     <div class="table"><table><thead><tr><th>Asset</th><th>Qty</th><th>Entry</th><th>Live</th><th>Value</th><th>P/L</th><th>Alloc.</th></tr></thead><tbody id="holdingsBody"></tbody></table></div>
-    <div class="note">Holdings updated from your latest 22 Sep 2026 KuCoin snapshot. Entry prices retain the existing reference baseline where available. NEAR uses $4.4127 as its new-position reference. AIN uses the latest KuCoin snapshot price ($0.02317) until a verified live market mapping is available.</div>
+    <div class="note">Holdings updated from your latest 23 Sep 2026 KuCoin snapshot. Entry prices and the fixed $2,885.08 portfolio baseline are retained from the existing dashboard. AIN uses the latest KuCoin snapshot price ($0.02473) until a verified live market mapping is available.</div>
   </section>
 
   <section id="meme" class="panel">
-    <div class="chips"><span class="chip">Snapshot <b>22 Sep 2026</b></span><span class="chip">Source <b>DEX Screener</b></span><span class="chip">Updated <b id="memeUpdated">not yet</b></span></div>
+    <div class="chips"><span class="chip">Snapshot <b>23 Sep 2026</b></span><span class="chip">Source <b>DEX Screener</b></span><span class="chip">Updated <b id="memeUpdated">not yet</b></span></div>
     <div class="grid">
       <div class="card"><div class="label">Baseline investment</div><div class="value">$905.82</div><div class="sub">22 Sep 2026 snapshots</div></div>
       <div class="card"><div class="label">Current value</div><div id="memeTotal" class="value">$696.48</div><div id="memeLive" class="sub">9 positions</div></div>
@@ -57,19 +57,19 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
 <script>
 const INITIAL=2885.08;
 const holdings=[
-{s:'SOL',n:'Solana',q:3.00000464,entry:118.77,initial:356.31,id:'solana',price:117.14},
-{s:'DOT',n:'Polkadot',q:327.4496093,entry:1.1877,initial:388.87,id:'polkadot',price:1.1644},
-{s:'GRAM',n:'Telegram / TON',q:219.96424024,entry:1.4530,initial:319.61,id:'the-open-network',price:1.436},
-{s:'ARB',n:'Arbitrum',q:1356.4934,entry:.2236,initial:303.28,id:'arbitrum',price:.2142},
-{s:'UNI',n:'Uniswap',q:29.3016,entry:8.8609,initial:259.73,id:'uniswap',price:9.1048},
-{s:'MON',n:'Monad',q:8419.90,entry:.02588,initial:217.88,id:'monad',price:.0263},
-{s:'USDT',n:'Tether',q:430.60,entry:1,initial:430.60,id:'tether',price:.99988},
-{s:'OP',n:'Optimism',q:1367.321,entry:.1253,initial:171.30,id:'optimism',price:.1265},
-{s:'NEAR',n:'NEAR Protocol',q:35.7488,entry:4.4127,initial:157.82,id:'near',price:4.4127},
-{s:'ONDO',n:'Ondo',q:334.5913,entry:.45242,initial:151.39,id:'ondo-finance',price:.42984},
-{s:'APT',n:'Aptos',q:184.6256269,entry:.774,initial:142.89,id:'aptos',price:.7679},
-{s:'AIN',n:'AI Network',q:5193.40,entry:.02098,initial:108.96,id:'ai-network',price:.02317,pinned:true},
-{s:'KCS',n:'KuCoin Token',q:1.678,entry:12.18/1.665,initial:12.27,id:'kucoin-shares',price:7.37}
+{s:'SOL',n:'Solana',q:4.00000000,entry:118.77,initial:356.31,id:'solana',price:119.54},
+{s:'NEAR',n:'NEAR Protocol',q:103.2468,entry:4.4127,initial:157.82,id:'near',price:4.3701},
+{s:'DOT',n:'Polkadot',q:327.4496093,entry:1.1877,initial:388.87,id:'polkadot',price:1.1991},
+{s:'ARB',n:'Arbitrum',q:1356.4934,entry:.2236,initial:303.28,id:'arbitrum',price:.2433},
+{s:'UNI',n:'Uniswap',q:29.3016,entry:8.8609,initial:259.73,id:'uniswap',price:10.457},
+{s:'ONDO',n:'Ondo',q:595.3264,entry:.45242,initial:151.39,id:'ondo-finance',price:.4426},
+{s:'APT',n:'Aptos',q:312.6435269,entry:.774,initial:142.89,id:'aptos',price:.8389},
+{s:'MON',n:'Monad',q:8419.90,entry:.02588,initial:217.88,id:'monad',price:.02704},
+{s:'OP',n:'Optimism',q:1367.321,entry:.1253,initial:171.30,id:'optimism',price:.136},
+{s:'DASH',n:'Dash',q:2.374,entry:63.01,initial:149.55,id:'dash',price:63.01},
+{s:'AIN',n:'AI Network',q:5193.40,entry:.02098,initial:108.96,id:'ai-network',price:.02473,pinned:true},
+{s:'USDT',n:'Tether',q:119.40,entry:1,initial:430.60,id:'tether',price:.99975},
+{s:'KCS',n:'KuCoin Token',q:1.678,entry:12.18/1.665,initial:12.27,id:'kucoin-shares',price:7.465}
 ];
 holdings.forEach(h=>{if(h.price==null)h.price=h.entry});
 
