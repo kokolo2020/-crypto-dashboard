@@ -29,16 +29,16 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   <div class="tabs"><button class="tab active" data-tab="portfolio">Portfolio</button><button class="tab" data-tab="meme">Memecoin</button><button class="tab" data-tab="watchlist">Watch list</button></div>
 
   <section id="portfolio" class="panel active">
-    <div class="chips"><span class="chip">Snapshot <b>23 Sep 2026</b></span><span class="chip">Initial <b>$3,447.52</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
+    <div class="chips"><span class="chip">Snapshot <b>24 Sep 2026</b></span><span class="chip">Initial <b>$3,426.96</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
     <div class="grid">
-      <div class="card"><div class="label">Initial investment</div><div class="value">$3,447.52</div><div class="sub">Fixed baseline</div></div>
-      <div class="card"><div class="label">Current value</div><div id="mainValue" class="value">$3,447.52</div><div id="mainLive" class="sub">Waiting for refresh</div></div>
+      <div class="card"><div class="label">Initial investment</div><div class="value">$3,426.96</div><div class="sub">Fixed baseline</div></div>
+      <div class="card"><div class="label">Current value</div><div id="mainValue" class="value">$3,426.96</div><div id="mainLive" class="sub">Waiting for refresh</div></div>
       <div class="card"><div class="label">Total P/L</div><div id="mainPL" class="value">$0.00</div><div id="mainPct" class="sub">0.00%</div></div>
       <div class="card"><div class="label">Largest position</div><div id="largest" class="value">—</div><div id="largestSub" class="sub">—</div></div>
     </div>
     <div class="toolbar"><h2>Holdings</h2><div id="mainStatus" class="status">CoinGecko live feed</div></div>
     <div class="table"><table><thead><tr><th>Asset</th><th>Qty</th><th>Entry</th><th>Live</th><th>Value</th><th>P/L</th><th>Alloc.</th></tr></thead><tbody id="holdingsBody"></tbody></table></div>
-    <div class="note">Holdings updated from your latest 23 Sep 2026 KuCoin snapshot. Entry prices and the fixed $3,447.52 portfolio baseline were reset from your latest 23 Sep 2026 KuCoin snapshot; P/L starts at $0.00 from this reset point. This latest snapshot is the new entry-price baseline; P/L starts at $0.00 from this reset point.</div>
+    <div class="note">Holdings and entry prices reset from your latest 24 Sep 2026 KuCoin snapshot. P/L starts at $0.00 from this reset point.</div>
   </section>
 
   <section id="meme" class="panel">
@@ -68,103 +68,17 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   </section>
 </div>
 <script>
-const INITIAL=3447.52;
+const INITIAL=3426.96;
 const holdings=[
-{s:'USDT',n:'Tether',q:1130.92,entry:0.9997,initial:1130.58,id:'tether',price:0.9997},
-{s:'NEAR',n:'NEAR Protocol',q:148.55044897,entry:4.4493,initial:660.64,id:'near',price:4.4493},
-{s:'APT',n:'Aptos',q:545.34132868,entry:0.7636,initial:416.29,id:'aptos',price:0.7636},
-{s:'ARB',n:'Arbitrum',q:1356.4934,entry:0.2198,initial:298.06,id:'arbitrum',price:0.2198},
-{s:'UNI',n:'Uniswap',q:29.3016,entry:9.1399,initial:267.74,id:'uniswap',price:9.1399},
-{s:'ONDO',n:'Ondo',q:595.3264,entry:0.4116,initial:244.96,id:'ondo-finance',price:0.4116},
-{s:'OP',n:'Optimism',q:1367.321,entry:0.1245,initial:170.18,id:'optimism',price:0.1245},
-{s:'DASH',n:'Dash',q:2.4157,entry:58.54,initial:141.63,id:'dash',price:58.54},
-{s:'JTO',n:'Jito',q:227.27,entry:0.462,initial:104.96,id:'jito-staked-sol',price:0.462},
-{s:'KCS',n:'KuCoin Token',q:1.742,entry:7.164,initial:12.48,id:'kucoin-shares',price:7.164}
-]!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Crypto Investment Dashboard</title>
-<style>
-:root{--bg:#090b0e;--panel:#11151b;--panel2:#151a22;--text:#f7f8fa;--muted:#8e96a4;--line:#252c36;--green:#17c99a;--red:#ff5c70;--accent:#7867ff;--live:#ffb020}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#080a0d,#0d1015);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-.wrap{max-width:1180px;margin:auto;padding:18px 12px 80px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px}
-h1{font-size:25px;margin:0}.muted,.sub{color:var(--muted)}.sub{font-size:12px;margin-top:5px}
-button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 13px;border-radius:12px;font-weight:800;cursor:pointer}button.primary,.tab.active{background:var(--accent);border-color:transparent}
-.tabs{display:flex;gap:8px;position:sticky;top:0;z-index:5;padding:8px 0;background:#090b0ef2}.tab{border-radius:999px;color:var(--muted)}.tab.active{color:#fff}
-.panel{display:none}.panel.active{display:block}.chips{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 14px}.chip,.pill{border:1px solid var(--line);background:#11151b;color:var(--muted);border-radius:999px;padding:6px 9px;font-size:11px}.chip b{color:#fff}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}.label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.value{font-size:24px;font-weight:850;margin-top:6px}
-.livePrice{color:var(--live)!important;font-weight:850}.positive{color:var(--green)!important}.negative{color:var(--red)!important}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0}.toolbar h2{font-size:18px;margin:0}.status{font-size:12px;color:var(--muted)}
-.table{overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel)}table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:13px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}th{font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:.08em}
-.asset{display:flex;align-items:center;gap:10px}.logo{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#1d2430;font-weight:900}.name{font-weight:800}.coinSub{font-size:11px;color:var(--muted);margin-top:2px}.note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:10px}
-.memeList{border:1px solid var(--line);border-radius:16px;overflow:hidden}.memeRow{display:grid;grid-template-columns:1.4fr .7fr .7fr .7fr;gap:10px;align-items:center;padding:14px;border-bottom:1px solid var(--line)}.memeRow:last-child{border-bottom:0}.r{text-align:right}
-@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}.memeRow{grid-template-columns:1.35fr .85fr .85fr .85fr}.memeQty{display:block}.actions #resetBtn{display:none}.value{font-size:20px}}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <div class="top">
-    <div><h1>Investment Dashboard</h1><div class="sub">Live portfolio & memecoin tracker</div></div>
-    <div class="actions"><button id="resetBtn">Entry prices</button><button id="refreshBtn" class="primary">↻ Refresh all</button></div>
-  </div>
-  <div class="tabs"><button class="tab active" data-tab="portfolio">Portfolio</button><button class="tab" data-tab="meme">Memecoin</button><button class="tab" data-tab="watchlist">Watch list</button></div>
-
-  <section id="portfolio" class="panel active">
-    <div class="chips"><span class="chip">Snapshot <b>23 Sep 2026</b></span><span class="chip">Initial <b>$3,447.52</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
-    <div class="grid">
-      <div class="card"><div class="label">Initial investment</div><div class="value">$3,447.52</div><div class="sub">Fixed baseline</div></div>
-      <div class="card"><div class="label">Current value</div><div id="mainValue" class="value">$3,447.52</div><div id="mainLive" class="sub">Waiting for refresh</div></div>
-      <div class="card"><div class="label">Total P/L</div><div id="mainPL" class="value">$0.00</div><div id="mainPct" class="sub">0.00%</div></div>
-      <div class="card"><div class="label">Largest position</div><div id="largest" class="value">—</div><div id="largestSub" class="sub">—</div></div>
-    </div>
-    <div class="toolbar"><h2>Holdings</h2><div id="mainStatus" class="status">CoinGecko live feed</div></div>
-    <div class="table"><table><thead><tr><th>Asset</th><th>Qty</th><th>Entry</th><th>Live</th><th>Value</th><th>P/L</th><th>Alloc.</th></tr></thead><tbody id="holdingsBody"></tbody></table></div>
-    <div class="note">Holdings updated from your latest 23 Sep 2026 KuCoin snapshot. Entry prices and the fixed $3,447.52 portfolio baseline were reset from your latest 23 Sep 2026 KuCoin snapshot; P/L starts at $0.00 from this reset point. AIN uses the latest KuCoin snapshot price ($0.02473) until a verified live market mapping is available.</div>
-  </section>
-
-  <section id="meme" class="panel">
-    <div class="chips"><span class="chip">Snapshot <b>23 Sep 2026</b></span><span class="chip">Source <b>DEX Screener</b></span><span class="chip">Updated <b id="memeUpdated">not yet</b></span></div>
-    <div class="grid">
-      <div class="card"><div class="label">Baseline investment</div><div class="value">$781.62</div><div class="sub">23 Sep 2026 reset snapshot</div></div>
-      <div class="card"><div class="label">Current value</div><div id="memeTotal" class="value">$781.62</div><div id="memeLive" class="sub">13 positions</div></div>
-      <div class="card"><div class="label">Total P/L</div><div id="memePL" class="value">$0.00</div><div id="memePct" class="sub">0.00%</div></div>
-      <div class="card"><div class="label">Largest position</div><div id="memeLargest" class="value">NEAR</div><div id="memeLargestSub" class="sub">$129.20</div></div>
-    </div>
-    <div class="toolbar"><h2>Memecoin holdings</h2><div><span id="memeStatus" class="status">DEX Screener live feed</span> <button id="memeRefreshBtn" class="primary">↻ Refresh</button></div></div>
-    <div id="memeList" class="memeList"></div>
-    <div class="note">Entry prices and position baselines were reset from your latest 23 Sep 2026 screenshot. P/L starts at $0.00 from this reset point. Live prices are pulled from DEX markets; unmatched tokens retain the snapshot price and are marked snapshot fallback.</div>
-  </section>
-
-  <section id="watchlist" class="panel">
-    <div class="chips"><span class="chip">Started <b>23 Sep 2026</b></span><span class="chip">Assumed per coin <b>$150</b></span><span class="chip">Total simulated <b>$1,500</b></span><span class="chip">Updated <b id="watchUpdated">not yet</b></span></div>
-    <div class="grid">
-      <div class="card"><div class="label">Simulated investment</div><div class="value">$1,500.00</div><div class="sub">10 coins × $150</div></div>
-      <div class="card"><div class="label">Current simulated value</div><div id="watchValue" class="value">$1,500.00</div><div class="sub">Based on live prices</div></div>
-      <div class="card"><div class="label">Overall move</div><div id="watchMove" class="value">0.00%</div><div class="sub">Since entry snapshot</div></div>
-      <div class="card"><div class="label">Best mover</div><div id="watchBest" class="value">—</div><div id="watchBestSub" class="sub">—</div></div>
-    </div>
-    <div class="toolbar"><h2>Watch list</h2><div><span id="watchStatus" class="status">CoinGecko live feed</span> <button id="watchRefreshBtn" class="primary">↻ Refresh</button></div></div>
-    <div class="table"><table><thead><tr><th>Asset</th><th>Entry</th><th>Live</th><th>Movement</th><th>Assumed $150 value</th></tr></thead><tbody id="watchBody"></tbody></table></div>
-    <div class="note">Entry prices are the 23 Sep 2026 starting snapshot. Each coin is modeled as a $150 position, so the quantity is fixed at $150 ÷ entry price. Movement is measured only from the entry price. Live refresh uses CoinGecko when available.</div>
-  </section>
-</div>
-<script>
-const INITIAL=3330.63;
-const holdings=[
-{s:'USDT',n:'Tether',q:652.35,entry:.99960,initial:652.09,id:'tether',price:.99960},
-{s:'NEAR',n:'NEAR Protocol',q:122.86784897,entry:4.7069,initial:578.45,id:'near',price:4.7069},
-{s:'ARB',n:'Arbitrum',q:1356.4934,entry:.2303,initial:312.13,id:'arbitrum',price:.2303},
-{s:'UNI',n:'Uniswap',q:29.3016,entry:9.5903,initial:281.05,id:'uniswap',price:9.5903},
-{s:'ONDO',n:'Ondo',q:595.3264,entry:.4312,initial:257.08,id:'ondo-finance',price:.4312},
-{s:'APT',n:'Aptos',q:312.64512868,entry:.8253,initial:257.92,id:'aptos',price:.8253},
-{s:'MON',n:'Monad',q:8419.90,entry:.02577,initial:216.80,id:'monad',price:.02577},
-{s:'DOT',n:'Polkadot',q:163.73858041,entry:1.1543,initial:189.04,id:'polkadot',price:1.1543},
-{s:'OP',n:'Optimism',q:1367.321,entry:.1342,initial:183.69,id:'optimism',price:.1342},
-{s:'DASH',n:'Dash',q:2.374,entry:64.39,initial:152.91,id:'dash',price:64.39},
-{s:'AIN',n:'AI Network',q:5193.40,entry:.02309,initial:119.87,id:'ai-network',price:.02309,pinned:true},
-{s:'SOL',n:'Solana',q:1.00005970,entry:116.96,initial:116.93,id:'solana',price:116.96},
-{s:'KCS',n:'KuCoin Token',q:1.742,entry:7.275,initial:12.67,id:'kucoin-shares',price:7.275}
+{s:'USDT',n:'Tether',q:1103.84,entry:0.9998,initial:1103.62,id:'tether',price:0.9998},
+{s:'NEAR',n:'NEAR Protocol',q:172.11474897,entry:4.379,initial:753.53,id:'near',price:4.379},
+{s:'APT',n:'Aptos',q:545.34132868,entry:0.7722,initial:421.02,id:'aptos',price:0.7722},
+{s:'ARB',n:'Arbitrum',q:1356.4934,entry:0.2209,initial:299.58,id:'arbitrum',price:0.2209},
+{s:'UNI',n:'Uniswap',q:29.3016,entry:9.4233,initial:276.06,id:'uniswap',price:9.4233},
+{s:'ONDO',n:'Ondo',q:595.3264,entry:0.41581,initial:247.49,id:'ondo-finance',price:0.41581},
+{s:'OP',n:'Optimism',q:1367.321,entry:0.1262,initial:172.52,id:'optimism',price:0.1262},
+{s:'DASH',n:'Dash',q:2.4157,entry:58.19,initial:140.66,id:'dash',price:58.19},
+{s:'KCS',n:'KuCoin Token',q:1.742,entry:7.166,initial:12.48,id:'kucoin-shares',price:7.166}
 ]
 holdings.forEach(h=>{if(h.price==null)h.price=h.entry});
 
