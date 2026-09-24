@@ -29,10 +29,10 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   <div class="tabs"><button class="tab active" data-tab="portfolio">Portfolio</button><button class="tab" data-tab="meme">Memecoin</button><button class="tab" data-tab="watchlist">Watch list</button></div>
 
   <section id="portfolio" class="panel active">
-    <div class="chips"><span class="chip">Snapshot <b>24 Sep 2026</b></span><span class="chip">Initial <b>$3,426.96</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
+    <div class="chips"><span class="chip">Snapshot <b>24 Sep 2026</b></span><span class="chip">Initial <b>$3,477.86</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
     <div class="grid">
-      <div class="card"><div class="label">Initial investment</div><div class="value">$3,426.96</div><div class="sub">Fixed baseline</div></div>
-      <div class="card"><div class="label">Current value</div><div id="mainValue" class="value">$3,426.96</div><div id="mainLive" class="sub">Waiting for refresh</div></div>
+      <div class="card"><div class="label">Initial investment</div><div class="value">$3,477.86</div><div class="sub">Fixed baseline</div></div>
+      <div class="card"><div class="label">Current value</div><div id="mainValue" class="value">$3,477.86</div><div id="mainLive" class="sub">Waiting for refresh</div></div>
       <div class="card"><div class="label">Total P/L</div><div id="mainPL" class="value">$0.00</div><div id="mainPct" class="sub">0.00%</div></div>
       <div class="card"><div class="label">Largest position</div><div id="largest" class="value">—</div><div id="largestSub" class="sub">—</div></div>
     </div>
@@ -68,18 +68,17 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   </section>
 </div>
 <script>
-const INITIAL=3426.96;
+const INITIAL=3477.86;
 const holdings=[
-{s:'USDT',n:'Tether',q:1103.84,entry:0.9998,initial:1103.62,id:'tether',price:0.9998},
-{s:'NEAR',n:'NEAR Protocol',q:172.11474897,entry:4.379,initial:753.53,id:'near',price:4.379},
-{s:'APT',n:'Aptos',q:545.34132868,entry:0.7722,initial:421.02,id:'aptos',price:0.7722},
-{s:'ARB',n:'Arbitrum',q:1356.4934,entry:0.2209,initial:299.58,id:'arbitrum',price:0.2209},
-{s:'UNI',n:'Uniswap',q:29.3016,entry:9.4233,initial:276.06,id:'uniswap',price:9.4233},
-{s:'ONDO',n:'Ondo',q:595.3264,entry:0.41581,initial:247.49,id:'ondo-finance',price:0.41581},
-{s:'OP',n:'Optimism',q:1367.321,entry:0.1262,initial:172.52,id:'optimism',price:0.1262},
-{s:'DASH',n:'Dash',q:2.4157,entry:58.19,initial:140.66,id:'dash',price:58.19},
-{s:'KCS',n:'KuCoin Token',q:1.742,entry:7.166,initial:12.48,id:'kucoin-shares',price:7.166}
-]
+{s:'USDT',n:'Tether',q:1090.23,entry:0.9995964,initial:1089.79,id:'tether',price:0.9995964},
+{s:'NEAR',n:'NEAR Protocol',q:172.11622117,entry:4.2561,initial:734.50,id:'near',price:4.2561},
+{s:'APT',n:'Aptos',q:545.34432441,entry:0.7648,initial:416.91,id:'aptos',price:0.7648},
+{s:'ARB',n:'Arbitrum',q:1356.4934,entry:0.2132,initial:288.95,id:'arbitrum',price:0.2132},
+{s:'UNI',n:'Uniswap',q:29.3016,entry:9.0245,initial:264.05,id:'uniswap',price:9.0245},
+{s:'ONDO',n:'Ondo',q:595.3264,entry:0.42721,initial:254.16,id:'ondo-finance',price:0.42721},
+{s:'DASH',n:'Dash',q:3.6749,entry:59.13,initial:216.95,id:'dash',price:59.13},
+{s:'PONS',n:'Pons',q:329.49,entry:0.6062,initial:199.62,id:null,price:0.6062,pinned:true},
+{s:'KCS',n:'KuCoin Token',q:1.806,entry:7.165,initial:12.93,id:'kucoin-shares',price:7.165}
 holdings.forEach(h=>{if(h.price==null)h.price=h.entry});
 
 const watchlist=[
