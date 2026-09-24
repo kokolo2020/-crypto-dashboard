@@ -29,10 +29,10 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   <div class="tabs"><button class="tab active" data-tab="portfolio">Portfolio</button><button class="tab" data-tab="meme">Memecoin</button><button class="tab" data-tab="watchlist">Watch list</button></div>
 
   <section id="portfolio" class="panel active">
-    <div class="chips"><span class="chip">Snapshot <b>24 Sep 2026</b></span><span class="chip">Initial <b>$3,477.86</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
+    <div class="chips"><span class="chip">Snapshot <b>24 Sep 2026</b></span><span class="chip">Initial <b>$3,716.12</b></span><span class="chip">Updated <b id="mainUpdated">not yet</b></span></div>
     <div class="grid">
-      <div class="card"><div class="label">Initial investment</div><div class="value">$3,477.86</div><div class="sub">Fixed baseline</div></div>
-      <div class="card"><div class="label">Current value</div><div id="mainValue" class="value">$3,477.86</div><div id="mainLive" class="sub">Waiting for refresh</div></div>
+      <div class="card"><div class="label">Initial investment</div><div class="value">$3,716.12</div><div class="sub">Fixed baseline</div></div>
+      <div class="card"><div class="label">Current value</div><div id="mainValue" class="value">$3,716.12</div><div id="mainLive" class="sub">Waiting for refresh</div></div>
       <div class="card"><div class="label">Total P/L</div><div id="mainPL" class="value">$0.00</div><div id="mainPct" class="sub">0.00%</div></div>
       <div class="card"><div class="label">Largest position</div><div id="largest" class="value">—</div><div id="largestSub" class="sub">—</div></div>
     </div>
@@ -68,17 +68,18 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   </section>
 </div>
 <script>
-const INITIAL=3477.86;
+const INITIAL=3716.12;
 const holdings=[
-{s:'USDT',n:'Tether',q:1090.23,entry:0.9995964,initial:1089.79,id:'tether',price:0.9995964},
-{s:'NEAR',n:'NEAR Protocol',q:172.11622117,entry:4.2561,initial:734.50,id:'near',price:4.2561},
-{s:'APT',n:'Aptos',q:545.34432441,entry:0.7648,initial:416.91,id:'aptos',price:0.7648},
-{s:'ARB',n:'Arbitrum',q:1356.4934,entry:0.2132,initial:288.95,id:'arbitrum',price:0.2132},
-{s:'UNI',n:'Uniswap',q:29.3016,entry:9.0245,initial:264.05,id:'uniswap',price:9.0245},
-{s:'ONDO',n:'Ondo',q:595.3264,entry:0.42721,initial:254.16,id:'ondo-finance',price:0.42721},
-{s:'DASH',n:'Dash',q:3.6749,entry:59.13,initial:216.95,id:'dash',price:59.13},
-{s:'PONS',n:'Pons',q:329.49,entry:0.6062,initial:199.62,id:null,price:0.6062,pinned:true},
-{s:'KCS',n:'KuCoin Token',q:1.806,entry:7.165,initial:12.93,id:'kucoin-shares',price:7.165}
+{s:'USDT',n:'Tether',q:827.98,entry:0.99958936,initial:827.64,id:'tether',price:0.99958936},
+{s:'NEAR',n:'NEAR Protocol',q:172.11622117,entry:4.57383,initial:787.23,id:'near',price:4.57383},
+{s:'APT',n:'Aptos',q:545.34432441,entry:0.82732,initial:451.20,id:'aptos',price:0.82732},
+{s:'ONDO',n:'Ondo',q:595.3264,entry:0.51828,initial:308.54,id:'ondo-finance',price:0.51828},
+{s:'ARB',n:'Arbitrum',q:1356.4934,entry:0.21801,initial:295.73,id:'arbitrum',price:0.21801},
+{s:'UNI',n:'Uniswap',q:29.3016,entry:9.25499,initial:271.19,id:'uniswap',price:9.25499},
+{s:'DASH',n:'Dash',q:3.6749,entry:62.87219,initial:231.05,id:'dash',price:62.87219},
+{s:'DOT',n:'Polkadot',q:188.09044345,entry:1.16630,initial:219.37,id:'polkadot',price:1.16630},
+{s:'PONS',n:'Pons',q:329.49,entry:0.63143,initial:208.05,id:null,price:0.63143,pinned:true},
+{s:'SOL',n:'Solana',q:1.00010079,entry:116.1083,initial:116.12,id:'solana',price:116.1083}
 ];
 holdings.forEach(h=>{if(h.price==null)h.price=h.entry});
 
