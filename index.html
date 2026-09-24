@@ -42,16 +42,16 @@ button{border:1px solid var(--line);background:#171c24;color:#fff;padding:10px 1
   </section>
 
   <section id="meme" class="panel">
-    <div class="chips"><span class="chip">Snapshot <b>23 Sep 2026</b></span><span class="chip">Source <b>DEX Screener</b></span><span class="chip">Updated <b id="memeUpdated">not yet</b></span></div>
+    <div class="chips"><span class="chip">Snapshot <b>24 Sep 2026</b></span><span class="chip">Source <b>DEX Screener</b></span><span class="chip">Updated <b id="memeUpdated">not yet</b></span></div>
     <div class="grid">
-      <div class="card"><div class="label">Baseline investment</div><div class="value">$781.62</div><div class="sub">23 Sep 2026 reset snapshot</div></div>
-      <div class="card"><div class="label">Current value</div><div id="memeTotal" class="value">$781.62</div><div id="memeLive" class="sub">13 positions</div></div>
+      <div class="card"><div class="label">Baseline investment</div><div class="value">$895.31</div><div class="sub">24 Sep 2026 reset snapshot</div></div>
+      <div class="card"><div class="label">Current value</div><div id="memeTotal" class="value">$895.31</div><div id="memeLive" class="sub">9 positions</div></div>
       <div class="card"><div class="label">Total P/L</div><div id="memePL" class="value">$0.00</div><div id="memePct" class="sub">0.00%</div></div>
-      <div class="card"><div class="label">Largest position</div><div id="memeLargest" class="value">NEAR</div><div id="memeLargestSub" class="sub">$129.20</div></div>
+      <div class="card"><div class="label">Largest position</div><div id="memeLargest" class="value">SOL</div><div id="memeLargestSub" class="sub">$168.29</div></div>
     </div>
     <div class="toolbar"><h2>Memecoin holdings</h2><div><span id="memeStatus" class="status">DEX Screener live feed</span> <button id="memeRefreshBtn" class="primary">↻ Refresh</button></div></div>
     <div id="memeList" class="memeList"></div>
-    <div class="note">Entry prices and position baselines were reset from your latest 23 Sep 2026 screenshot. P/L starts at $0.00 from this reset point. Live prices are pulled from DEX markets; unmatched tokens retain the snapshot price and are marked snapshot fallback.</div>
+    <div class="note">Entry prices and position baselines were reset from your latest 24 Sep 2026 screenshot. P/L starts at $0.00 from this reset point. Live prices are pulled from DEX markets; unmatched tokens retain the snapshot price and are marked snapshot fallback.</div>
   </section>
 
   <section id="watchlist" class="panel">
@@ -96,19 +96,15 @@ const watchlist=[
 ].map(h=>({...h,q:150/h.entry}));
 
 const memes=[
-{s:'HOOKR',n:'Hookr.fun',q:9399.75107,price:.0155,value:145.34,initial:145.34,ch:.50},
-{s:'NEAR',n:'NEAR',q:29.71481,price:4.55,value:135.17,initial:135.17,ch:4.74},
-{s:'WALLET',n:'Robinhood Wallet',q:4754.2536,price:.0236,value:112.37,initial:112.37,ch:4.31},
-{s:'CATE',n:'Cate',q:990.37527,price:.1051,value:104.12,initial:104.12,ch:6.19},
-{s:'MEME',n:'A Meme Coin',q:2079.36933,price:.0352,value:73.16,initial:73.16,ch:23.56},
-{s:'PROLOGUE',n:'Prologue',q:5872.90958,price:.0112,value:65.56,initial:65.56,ch:5.77},
-{s:'PONS',n:'Pons',q:79.18628,price:.6788,value:53.75,initial:53.75,ch:13.65},
-{s:'AERO',n:'Aerodrome Finance',q:55.05463,price:.7273,value:40.04,initial:40.04,ch:5.60},
-{s:'INDEX',n:'The Index',q:500,price:.0362,value:18.08,initial:18.08,ch:-8.46},
-{s:'ETH',n:'Ethereum',q:.00565,price:2754.37,value:15.58,initial:15.58,ch:.81},
-{s:'ETH',n:'Ethereum',q:.0029,price:2754.05,value:7.99,initial:7.99,ch:.82},
-{s:'BNB',n:'BNB',q:.00695,price:791.32,value:5.50,initial:5.50,ch:.55},
-{s:'SOL',n:'Solana',q:.04168,price:118.95,value:4.96,initial:4.96,ch:2.02}
+{s:'SOL',n:'Solana',q:1.46537,price:114.84,value:168.29,initial:168.29,ch:-0.66},
+{s:'HOOKR',n:'Hookr.fun',q:8879.13121,price:.0132,value:117.08,initial:117.08,ch:-2.45},
+{s:'INDEX',n:'The Index',q:3897.87786,price:.029,value:113.20,initial:113.20,ch:-8.43},
+{s:'CASHCAT',n:'Cash Cat',q:716.03264,price:.1569,value:112.37,initial:112.37,ch:-3.88},
+{s:'CATE',n:'Cate',q:1141.33163,price:.0922,value:105.25,initial:105.25,ch:2.43},
+{s:'BASECAT',n:'Basecat',q:5354.35599,price:.0194,value:103.73,initial:103.73,ch:-2.27},
+{s:'WALLET',n:'Robinhood Wallet',q:4935.21231,price:.0209,value:102.93,initial:102.93,ch:-2.40},
+{s:'MEME',n:'A Meme Coin',q:1987.71965,price:.0291,value:57.75,initial:57.75,ch:-15.38},
+{s:'ETH',n:'Ethereum',q:.00552,price:2661.53,value:14.71,initial:14.71,ch:-0.61}
 ];
 
 const dex={
@@ -116,6 +112,8 @@ NEAR:{chain:'near',query:'NEAR'},
 HOOKR:{chain:'robinhood',address:'0x18E674231A58c239Dc7DaeDcffE15Ec3A24cff5c'},
 WALLET:{chain:'robinhood',query:'Robinhood Wallet WALLET'},
 CATE:{chain:'solana',query:'Cate CATE'},
+CASHCAT:{chain:'robinhood',query:'Cash Cat CASHCAT'},
+BASECAT:{chain:'base',query:'Basecat BASECAT'},
 PROLOGUE:{chain:'robinhood',query:'Prologue PROLOGUE'},
 MEME:{chain:'robinhood',query:'A Meme Coin MEME'},
 PONS:{chain:'robinhood',query:'Pons PONS'},
